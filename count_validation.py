@@ -18,7 +18,7 @@ ORDER BY day(created_date)
 
 SELECT Evaluation_Id, count(*)
 FROM merge_quality
-WHERE created_date = "2024-04-18"
+WHERE created_date = "2024-05-10"
 GROUP BY Evaluation_Id
 ORDER BY Evaluation_Id
 
@@ -30,3 +30,14 @@ ORDER BY Questions
 SELECT *
 FROM merge_quality
 WHERE eval_id IN ("213630345", "213630348", "213630349", "213630472")
+
+SELECT id, Evaluation_Form__c
+FROM merge_quality
+WHERE Evaluation_Form__c not IN ('Chat Evaluation', 'Email Evaluation')
+
+select * EXCEPT(Dw_Createduserid, Dw_Lastupdateduserid, Dw_Createdtime, Dw_Lastupdatedtime, Wire_Type) 
+
+select count(*) from(
+    SELECT distinct eval_id 
+    FROM merge_quality) AS abc
+
