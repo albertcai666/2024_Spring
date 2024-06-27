@@ -11,15 +11,19 @@ for column in pandas_df:
 sparkDF = spark.createDataFrame(pandas_df.astype(str)) # view of pandas df is ugly, want all data types to String
 sparkDF.display()  
 
-aB2OM00000071H70AI
-aB2OM00000072Y90AI
-aB2OM0000007BRl0AM
-aB2OM0000007BTN0A2
-aB2OM0000007Dwb0AE
-aB2OM0000007EW50AM
-aB2OM0000007HiT0AU
-aB2OM0000007P9l0AE
-aB2OM0000007Q0z0AE
-aB2OM0000007Q5p0AE
-aB2OM0000007SE50AM
-aB2OM0000007XvJ0AU
+# result_df = new_sql_df1.unionByName(new_uvc_df1) # union
+# lst = result_df.collect() # array of Row objects 
+# for i in range(len(result_df.columns)):
+#    if lst[0][i] != lst[1][i]:
+#       unmatch.add(result_df.columns[i])
+#       if type(lst[0][i]) == bool:
+#          compar.append(False)
+#       else:
+#          compar.append("False")  # o/w incompatible data type
+#    else:
+#       if type(lst[0][i]) == bool:
+#          compar.append(True)
+#       else:
+#          compar.append("T")
+# compar_row = spark.createDataFrame([tuple(compar)])
+# result_df = result_df.union(compar_row) 

@@ -1,0 +1,55 @@
+{
+    "id": "3e4ccfde-0b36-4711-8da2-16f2db5a7e8e",
+    "pipeline_type": "WORKSPACE",
+    "clusters": [
+        {
+            "label": "default",
+            "custom_tags": {
+                "project": "cxbi",
+                "table": "mergedquality"
+            },
+            "spark_env_vars": {
+                "QUALYS_CUSTOMERID": "{{secrets/cdnopscacplabkv/qualys-customerid}}",
+                "QUALYS_ACTIVATIONID": "{{secrets/cdnopscacplabkv/qualys-activationid}}",
+                "ARTIFACTORY_PWD": "{{secrets/cdnopscacplabkv/artifactory}}"
+            },
+            "autoscale": {
+                "min_workers": 3,
+                "max_workers": 6,
+                "mode": "ENHANCED"
+            }
+        },
+        {
+            "label": "maintenance",
+            "custom_tags": {
+                "project": "cxbi",
+                "table": "mergedquality"
+            }
+        }
+    ],
+    "development": true,
+    "continuous": false,
+    "channel": "CURRENT",
+    "photon": false,
+    "libraries": [
+        {
+            "notebook": {
+                "path": "/Repos/wayifan@mfcgd.com/cddl-cddl_cx_bi/src/databricks_src/CXBI_DLT/quality/dlt_cxbi_mergequality_gold"
+            }
+        }
+    ],
+    "name": "dlt_pl_cxbi_merged_quality_gold",
+    "edition": "ADVANCED",
+    "storage": "abfss://ops-cxbi-system-non-pii-delta@cdnopscacplabdl.dfs.core.windows.net/dlt_pl_cxbi_merged_quality_gold/",
+    "configuration": {
+        "spark.hadoop.fs.azure.account.auth.type.cdnopscacplabdl.dfs.core.windows.net": "OAuth",
+        "spark.hadoop.fs.azure.account.oauth.provider.type.cdnopscacplabdl.dfs.core.windows.net": "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider",
+        "spark.hadoop.fs.azure.account.oauth2.client.id.cdnopscacplabdl.dfs.core.windows.net": "e7557233-bebb-4b2f-b383-e85292968c99",
+        "spark.hadoop.fs.azure.account.oauth2.client.secret.cdnopscacplabdl.dfs.core.windows.net": "{{secrets/cdnopscacplabkv/ops-cxbi-plab-spn}}",
+        "spark.hadoop.fs.azure.account.oauth2.client.endpoint.cdnopscacplabdl.dfs.core.windows.net": "https://login.microsoftonline.com/5d3e2773-e07f-4432-a630-1a0f68a28a05/oauth2/token",
+        "storage_account": "cdnopscacplabdl",
+        "silver_container": "ops-uvc-cur-cdl-quality-pii-delta",
+        "gold_container": "ops-cxbi-pub-pii-delta"
+    },
+    "target": "cxbi"
+}
