@@ -1,0 +1,64 @@
+{
+    "id": "95d459aa-f653-4cf6-843c-a2eddf7e4824",
+    "pipeline_type": "WORKSPACE",
+    "clusters": [
+        {
+            "label": "default",
+            "custom_tags": {
+                "project": "cxbi",
+                "table": "wfm"
+            },
+            "spark_env_vars": {
+                "QUALYS_CUSTOMERID": "{{secrets/cdnopscacplabkv/qualys-customerid}}",
+                "QUALYS_ACTIVATIONID": "{{secrets/cdnopscacplabkv/qualys-activationid}}",
+                "ARTIFACTORY_PWD": "{{secrets/cdnopscacplabkv/artifactory}}"
+            },
+            "autoscale": {
+                "min_workers": 3,
+                "max_workers": 6,
+                "mode": "ENHANCED"
+            }
+        },
+        {
+            "label": "maintenance",
+            "custom_tags": {
+                "project": "cxbi",
+                "table": "wfm"
+            }
+        }
+    ],
+    "development": true,
+    "continuous": false,
+    "channel": "CURRENT",
+    "photon": false,
+    "libraries": [
+        {
+            "notebook": {
+                "path": "/Repos/Shared/csdo_ops_unifiedview/src/WFM/dlt_scheduledactivities_silver"
+            }
+        }
+    ],
+    "name": "dlt_pl_verint_wfm_scheduledactivities_silver",
+    "edition": "ADVANCED",
+    "storage": "abfss://ops-uvc-system-non-pii-delta@cdnopscacplabdl.dfs.core.windows.net/dlt_pl_verint_wfm_scheduledactivities_silver/",
+    "configuration": {
+        "spark.hadoop.fs.azure.account.auth.type.cdncacprodopsdl.dfs.core.windows.net": "OAuth",
+        "spark.hadoop.fs.azure.account.oauth.provider.type.cdncacprodopsdl.dfs.core.windows.net": "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider",
+        "spark.hadoop.fs.azure.account.oauth2.client.id.cdncacprodopsdl.dfs.core.windows.net": "9a453986-b4ac-45eb-9c1b-bbd6a4adcefe",
+        "spark.hadoop.fs.azure.account.oauth2.client.secret.cdncacprodopsdl.dfs.core.windows.net": "{{secrets/cdnopscacplabkv/ops-uvc-plab-spn}}",
+        "spark.hadoop.fs.azure.account.oauth2.client.endpoint.cdncacprodopsdl.dfs.core.windows.net": "https://login.microsoftonline.com/5d3e2773-e07f-4432-a630-1a0f68a28a05/oauth2/token",
+        "spark.hadoop.fs.azure.account.auth.type.cdnopscacplabdl.dfs.core.windows.net": "OAuth",
+        "spark.hadoop.fs.azure.account.oauth.provider.type.cdnopscacplabdl.dfs.core.windows.net": "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider",
+        "spark.hadoop.fs.azure.account.oauth2.client.id.cdnopscacplabdl.dfs.core.windows.net": "9a453986-b4ac-45eb-9c1b-bbd6a4adcefe",
+        "spark.hadoop.fs.azure.account.oauth2.client.secret.cdnopscacplabdl.dfs.core.windows.net": "{{secrets/cdnopscacplabkv/ops-uvc-plab-spn}}",
+        "spark.hadoop.fs.azure.account.oauth2.client.endpoint.cdnopscacplabdl.dfs.core.windows.net": "https://login.microsoftonline.com/5d3e2773-e07f-4432-a630-1a0f68a28a05/oauth2/token",
+        "storage_account": "cdnopscacplabdl",
+        "wfm_silver_container": "ops-uvc-cur-cdl-wfm-pii-delta",
+        "verintwfm_silver_container": "ops-uvc-cur-cdl-wfm-pii-delta",
+        "mapping_container": "sharepoint-nonpii",
+        "container_e360": "e360-nonpii",
+        "prod_storageaccount": "cdncacprodopsdl",
+        "verintwfm_raw_container": "verint-wfm-nonpii"
+    },
+    "target": "cxbi"
+}

@@ -1,0 +1,62 @@
+{
+    "id": "7eca0130-be64-49e0-a8ef-3c321fec9c3b",
+    "pipeline_type": "WORKSPACE",
+    "clusters": [
+        {
+            "label": "default",
+            "custom_tags": {
+                "project": "cxbi",
+                "table": "wfm"
+            },
+            "spark_env_vars": {
+                "QUALYS_CUSTOMERID": "{{secrets/cdnopscacplabkv/qualys-customerid}}",
+                "QUALYS_ACTIVATIONID": "{{secrets/cdnopscacplabkv/qualys-activationid}}",
+                "ARTIFACTORY_PWD": "{{secrets/cdnopscacplabkv/artifactory}}"
+            },
+            "autoscale": {
+                "min_workers": 3,
+                "max_workers": 6,
+                "mode": "ENHANCED"
+            }
+        },
+        {
+            "label": "maintenance",
+            "custom_tags": {
+                "project": "cxbi",
+                "table": "wfm"
+            }
+        }
+    ],
+    "development": true,
+    "continuous": false,
+    "channel": "CURRENT",
+    "photon": false,
+    "libraries": [
+        {
+            "notebook": {
+                "path": "/Users/caizhec@mfcgd.com/WFM/dlt_cxbi_scheduledactivities_gold"
+            }
+        }
+    ],
+    "name": "dlt_verint_wfm_scheduledactivities_gold",
+    "edition": "ADVANCED",
+    "storage": "abfss://ops-cxbi-system-non-pii-delta@cdnopscacplabdl.dfs.core.windows.net/dlt_verint_wfm_scheduledactivities_gold/",
+    "configuration": {
+        "spark.hadoop.fs.azure.account.auth.type.cdnopscacplabdl.dfs.core.windows.net": "OAuth",
+        "spark.hadoop.fs.azure.account.oauth.provider.type.cdnopscacplabdl.dfs.core.windows.net": "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider",
+        "spark.hadoop.fs.azure.account.oauth2.client.id.cdnopscacplabdl.dfs.core.windows.net": "e7557233-bebb-4b2f-b383-e85292968c99",
+        "spark.hadoop.fs.azure.account.oauth2.client.secret.cdnopscacplabdl.dfs.core.windows.net": "{{secrets/cdnopscacplabkv/ops-cxbi-plab-spn}}",
+        "spark.hadoop.fs.azure.account.oauth2.client.endpoint.cdnopscacplabdl.dfs.core.windows.net": "https://login.microsoftonline.com/5d3e2773-e07f-4432-a630-1a0f68a28a05/oauth2/token",
+        "storage_account": "cdnopscacplabdl",
+        "silver_container": "ops-uvc-cur-cdl-wfm-pii-delta",
+        "gold_container": "ops-cxbi-pub-pii-delta"
+    },
+    "target": "cxbi"
+}
+
+
+add after line 3964 ops-uvc-cur-cdl-wfm-pii-delta
+{
+    group_name   = "ops-cxbi-plab-spn"
+    principal_id = "208ca23a-dda9-47a5-b29a-148cf968de48"
+  }
